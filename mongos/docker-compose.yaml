@@ -1,0 +1,12 @@
+services:
+  mongos:
+    container_name: mongos1
+    image: mongo
+    command: mongos --configdb cfgrs/configs4:27017,configs2:27017,configs3:27017 --bind_ip 0.0.0.0 --port 27017
+    ports:
+      - 30000:27017
+    networks:
+      - mongo-cluster
+networks:
+  mongo-cluster:
+    external: true

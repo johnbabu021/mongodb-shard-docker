@@ -1,0 +1,43 @@
+# version: '3'
+services:
+  configs4:
+    container_name: configs4
+    image: mongo
+    command: mongod --configsvr --replSet cfgrs --port 27017 --dbpath /data/db
+    ports:
+      - 10001:27017
+    volumes:
+      - configs4:/data/db
+    networks:
+      - mongo-cluster
+
+  configs2:
+    container_name: configs2
+    image: mongo
+    command: mongod --configsvr --replSet cfgrs --port 27017 --dbpath /data/db
+    ports:
+      - 10002:27017
+    volumes:
+      - configs2:/data/db
+    networks:
+      - mongo-cluster
+
+  configs3:
+    container_name: configs3
+    image: mongo
+    command: mongod --configsvr --replSet cfgrs --port 27017 --dbpath /data/db
+    ports:
+      - 10003:27017
+    volumes:
+      - configs3:/data/db
+    networks:
+      - mongo-cluster
+
+volumes:
+  configs4: {}
+  configs2: {}
+  configs3: {}
+
+networks:
+  mongo-cluster:
+    external: true
